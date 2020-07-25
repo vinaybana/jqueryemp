@@ -1,17 +1,24 @@
 $(document).ready(function(){
-	$('#headingModal').on('click', '.btn-primary', function(){
+	$(".had button").click(function(){
+		// console.log("hello")
     	var valu = $('#heading-name').val();
-    	$("main").append('<h2>'+valu+'</h2>');    
-		$('#headingModal').modal('hide');
-		$.each(('main h2'), function(i){
-			$.each('main h2').text(i), function(index,value){
-				$("select").append('<option>'+value+'<option>');
-			};
-		});	
+    	// console.log(valu)
+    	$('main').append('<h2>'+valu+'</h2>');
+    	$("#subheadingModal select option").remove(); 
+    	$("#subheadingModal select").append('<option value=""></option>');   
+		$('main h2').each(function(key){
+			var hdd=$(this).text();
+			key=key+1		
+			$("#subheadingModal select").append('<option value="'+key+'">'+hdd+'</option>'); 
+			
+		});
+		$('#headingModal').modal('hide');	
 	});
-	$('#subheadingModal').on('click', '.btn-primary', function(){
+ 
+	$('.sbhd button').click(function(){
 		var headi = $('#sub-heading-name').val();
-		$("main h2").append('<h3>'+headi+'</h3>');
+		var hdn = $("#subheadingModal select option:selected").val();
+		$('main h2:nth-child('+hdn+')').append('<h3>'+headi+'<h3>');
 		$('#subheadingModal').modal('hide');
 	});	
 });	
