@@ -10,25 +10,25 @@
 
 
 
-		<title>Hello, world!</title>
+		<title> JQUERY TEST!</title>
+		<style>
+		button{margin-left: 90px;}
+		</style>
 	</head>
 	<body>
-		
-
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#headingModal" data-whatever="@mdo">Headings</button>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#subheadingModal">Sub-headings</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Heading</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">Sub Heading</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">Form</button>
 		<main>
-			
+
+
 		</main>
-		
-		
 
-
-		<div class="modal fade" id="headingModal" tabindex="-1" role="dialog" aria-labelledby="headingModalLabel" aria-hidden="true">
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="headingModalLabel">Suggest headings</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Suggest headings</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -41,19 +41,17 @@
 							</div>
 						</form>
 					</div>
-					<div class="modal-footer had">
+					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-
-		<div class="modal fade" id="subheadingModal" tabindex="-1" role="dialog" aria-labelledby="subheadingModalLabel" aria-hidden="true">
+		<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="subheadingModalLabel"> Sub headings</h5>
+						<h5 class="modal-title" id="exampleModal1Label">Sub headings</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -61,28 +59,95 @@
 					<div class="container">
 						<h2>Sub headings</h2>
 						<p>Select heading here</p>
-						<div class="dropdown">	
-							<select id="hddng">
+						<div class="dropdown sbhdng">  
+							<select>
 								<option value="">--select--</option>
 							</select>
 						</div>
 						<div class="modal-body">
-						<form>
-							<div class="form-group">
-								<label for="sub-heading-name" class="col-form-label">Sub heading</label>
-								<input type="text" class="form-control" id="sub-heading-name">
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer sbhd">
-						<button type="submit" class="btn btn-primary">Submit</button>
+							<form>
+								<div class="form-group">
+									<label for="sub-heading-name" class="col-form-label">Sub heading</label>
+									<input type="text" class="form-control" id="sub-heading-name">
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer sbhd">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div> 
-		
-
-				
+		</div>
+		<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModal2Label">Form</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="container">
+						<p>Select heading here</p>
+							<div class="dropdown frmhdg">  
+								<select>
+									<option value="">--select--</option>
+								</select>
+							</div><br>
+							<p>Select Sub-heading here</p>
+							<div class="dropdown sbhdg">  
+								<select>
+									<option value="">--select--</option>
+								</select>
+							</div><br>
+							<p>Select input here</p>
+							<div class="dropdown">  
+								<select id="inputtt">
+									<option value="">--select--</option>
+									<option value="button">Button</option>
+									<option value="checkbox">Checkbox</option>
+									<option value="email">Email</option>
+									<option value="image">Image</option>
+									<option value="hidden">Hidden</option>
+									<option value="file">File</option>
+									<option value="number">Number</option>
+									<option value="password">Password</option>
+									<option value="radio">Radio</option>
+									<option value="reset">Reset</option>
+									<option value="search">Search</option>
+									<option value="submit">Submit</option>
+									<option value="text">Text</option>
+									<option value="select">select</option>
+								</select>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="form-group">
+										<label for="form-in" class="col-form-label">Form</label>
+										<input type="text" class="form-control" id="label" placeholder="label">
+										<input type="text" class="form-control" id="name" placeholder="name">
+										<input type="text" class="form-control" id="placeholder" placeholder="placeholder">
+										<input type="text" class="form-control" id="class" placeholder="class">
+										<input type="text" class="form-control" id="value" placeholder="value">
+										<input type="text" class="form-control" id="select" placeholder="select"><br>
+										<input type="radio" id="disable" name="disable" value="disable">
+										<label for="disable">Disable</label><br>
+										<input type="radio" id="readonly" name="readonly" value="readonly">
+										<label for="readonly">Readonly</label><br>
+										<input type="radio" id="reuired" name="reuired" value="reuired">
+										<label for="reuired">Reuired</label><br>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer ff">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 		<!-- Optional JavaScript -->
