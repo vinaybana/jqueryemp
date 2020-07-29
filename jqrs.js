@@ -1,7 +1,11 @@
 $(document).ready(function(){
-	$("#exampleModal .btn-primary").click(function(){
+	// $(".enc input").on('submit', function(event) {
+ //        	event.preventDefault();
+ //        	$(".enc input").submit();
+	// });
+	$("#exampleModal .btn-primary").click( function(){
     	var valu = $('#heading-name').val();  											// get value of input of heading modal
-    	$('main').append('<section><h2>'+valu+'</h2></section>');  						 // stores input of heading modal in h2 tag 
+    	$('main').append('<section><h2>'+valu+'<button type="button">X</button></h2></section>');  						 // stores input of heading modal in h2 tag 
     	$(".sbhdng select option").remove();  					  						 // remove static values of option of select
     	$(".sbhdng select").append('<option value=""></option>'); 						 // create dynamic option for select
 		$(".frmhdg select option").remove();
@@ -21,7 +25,7 @@ $(document).ready(function(){
 		var headi = $('#sub-heading-name').val();  										// get value of input of sub heading modal
 		var hdn = $(".sbhdng select option:selected").val(); 							// to get value of selected option for select
 		// console.log(hdn);
-		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'</h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
+		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'<button type="button">X</button></h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
 		$('#exampleModal1').modal('hide');
 	});
 
@@ -41,22 +45,51 @@ $(document).ready(function(){
 	}); 
 
 	$('.ff .btn-primary').click(function(){
-		console.log("fssssssssssss");
 		var fsh = $(".frmhdg select option:selected").val();
 		var fss = $(".sbhdg select option:selected").val(); 
 		var fss = parseInt(fss)+1;
 		var fmin = $('.inpt select option:selected').val();
 		console.log(fss);
+		console.log(fmin);
 		var lbl = $('.labl').val();
 		var nm = $('.naam').val();
 		var plchd = $('.plhd').val();
 		var cls = $('.clas').val();
 		var vlu = $('.vl').val();
-		var ccc = $('main section:nth-child('+fsh+') div:nth-child('+fss+')').text();
-		console.log(ccc);
-
-		$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');
+		if (fmin == 'checkbox'){
+			console.log("ift");
+			var lbls = lbl.split(',');
+			console.log(lbls);
+			$(lbls).each(function(key){	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbls[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+			});
+		}
+		else if (fmin == 'radio'){
+			console.log("elif1");
+			var lbls = lbl.split(',');
+			console.log(lbls);
+			$(lbls).each(function(key){	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbls[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+			});
+		}
+		else if  (fmin == 'select'){
+			console.log("elif2");
+			var vlus = vlu.split(',');
+			console.log(vlus);
+			var p = $('<select><option>select</option></select>');
+			for (i=0; i< vlus.length; i++){
+				var p = $(p).append('<option value="'+vlus[i]+'">'+vlus[i]+'</option>')
+				console.log(p);	
+			}
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(p);
+			
+		}
+		else{	
+			console.log("el");
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');			// to append main>section>div to store input values
+		}
 		$('#exampleModal2').modal('hide');
+		
 
 	});
 });
