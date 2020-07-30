@@ -15,7 +15,7 @@ $(document).ready(function(){
 		$('main section h2').each(function(key){
 			key=key+1	
 			var hdd=$(this).text().replace("X", " ");  
-			console.log(hdd);    	
+			// console.log(hdd);    	
 			$(".sbhdng select").append('<option value="'+key+'">'+hdd+'</option>');	   // dynamically value and text created for option of select
 			$(".frmhdg select").append('<option value="'+key+'">'+hdd+'</option>');	
 		});
@@ -49,30 +49,31 @@ $(document).ready(function(){
 		var fss = $(".sbhdg select option:selected").val(); 
 		var fss = parseInt(fss)+1;
 		var fmin = $('.inpt select option:selected').val();
-		console.log(fss);
-		console.log(fmin);
+		// console.log(fss);
+		// console.log(fmin);
 		var lbl = $('.labl').val();
 		var nm = $('.naam').val();
 		var plchd = $('.plhd').val();
 		var cls = $('.clas').val();
 		var vlu = $('.vl').val();
+		var opn = $('.opt').val();
 		if (fmin == 'checkbox'){
-			var lbls = lbl.split(',');
-			$(lbls).each(function(key){	
-				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbls[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+			var opns = opn.split(',');
+			$(opns).each(function(key){	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
 			});
 		}
 		else if (fmin == 'radio'){
-			var lbls = lbl.split(',');
-			$(lbls).each(function(key){	
-				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbls[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+			var opns = opn.split(',');
+			$(opns).each(function(key){	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
 			});
 		}
 		else if  (fmin == 'select'){
-			var vlus = vlu.split(',');
+			var opns = opn.split(',');
 			var p = $('<select><option>select</option></select>');
-			for (i=0; i< vlus.length; i++){
-				var p = $(p).append('<option value="'+vlus[i]+'">'+vlus[i]+'</option>')
+			for (i=0; i< opns.length; i++){
+				var p = $(p).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
 			}
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(p);			
 		}
