@@ -5,7 +5,7 @@ $(document).ready(function(){
 	// });
 	$("#exampleModal .btn-primary").click( function(){
     	var valu = $('#heading-name').val();  											// get value of input of heading modal
-    	$('main').append('<section><h2>'+valu+'<button type="button" value="submit">X</button></h2></section>');  						 // stores input of heading modal in h2 tag 
+    	$('main').append('<section><h2>'+valu+'<button onclick="myfunction(this)">X</button></h2></section>');  						 // stores input of heading modal in h2 tag 
     	$(".sbhdng select option").remove();  					  						 // remove static values of option of select
     	$(".sbhdng select").append('<option value=""></option>'); 						 // create dynamic option for select
 		$(".frmhdg select option").remove();
@@ -14,7 +14,8 @@ $(document).ready(function(){
 		// console.log(len);
 		$('main section h2').each(function(key){
 			key=key+1	
-			var hdd=$(this).text();	      	
+			var hdd=$(this).text().replace("X", " ");  
+			console.log(hdd);    	
 			$(".sbhdng select").append('<option value="'+key+'">'+hdd+'</option>');	   // dynamically value and text created for option of select
 			$(".frmhdg select").append('<option value="'+key+'">'+hdd+'</option>');	
 		});
@@ -25,7 +26,7 @@ $(document).ready(function(){
 		var headi = $('#sub-heading-name').val();  										// get value of input of sub heading modal
 		var hdn = $(".sbhdng select option:selected").val(); 							// to get value of selected option for select
 		// console.log(hdn);
-		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'<button type="button">X</button></h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
+		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'<button onclick="myFunction(this)">X</button></h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
 		$('#exampleModal1').modal('hide');
 	});
 
@@ -36,7 +37,7 @@ $(document).ready(function(){
 		var fdn = $(".frmhdg select option:selected").val();       				       // to get value of selected option form heading of form modal
 		// console.log(fdn); 
 		$('main section:nth-child('+fdn+') div').each(function(key){   				   // each function over div of section of main, according to the selected option from heading of form modal
-			var zxc = $(this).text();												   // text of particular div  
+			var zxc = $(this).text().replace("X", " ");												   // text of particular div  
 			key = key+1
 			// console.log(zxc);
 			$('.sbhdg select').append('<option value="'+key+'">'+zxc+'</option>')
@@ -85,13 +86,18 @@ $(document).ready(function(){
 	});
 });
 
-$('main .button').click(function(){
-	console.log("heyyyyyyyyy");
-})
-
-
+function myfunction(thisd){
+	var z = $(thisd).parent().parent().remove();
+}
+function myFunction(thi){
+	var y = $(thi).parent().parent().remove();
+}
 	
 
 	
+
+
+
+
 
 
