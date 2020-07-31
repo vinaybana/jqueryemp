@@ -5,7 +5,7 @@ $(document).ready(function(){
 	// });
 	$("#exampleModal .btn-primary").click( function(){
     	var valu = $('#heading-name').val();  											// get value of input of heading modal
-    	$('main').append('<section><h2>'+valu+'<button onclick="myfunction(this)">X</button></h2></section>');  						 // stores input of heading modal in h2 tag 
+    	$('main').append('<section><h2>'+valu+'<button onclick="myfunction(this)">X</button></h2></section>');  	 // stores input of heading modal in h2 tag 
     	$(".sbhdng select option").remove();  					  						 // remove static values of option of select
     	$(".sbhdng select").append('<option value=""></option>'); 						 // create dynamic option for select
 		$(".frmhdg select option").remove();
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		var headi = $('#sub-heading-name').val();  										// get value of input of sub heading modal
 		var hdn = $(".sbhdng select option:selected").val(); 							// to get value of selected option for select
 		// console.log(hdn);
-		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'<button onclick="myFunction(this)">X</button></h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
+		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'<button onclick="myfunction(this)">X</button></h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
 		$('#exampleModal1').modal('hide');
 	});
 
@@ -36,7 +36,7 @@ $(document).ready(function(){
 		$(".sbhdg select").append('<option value=""></option>');
 		var fdn = $(".frmhdg select option:selected").val();       				       // to get value of selected option form heading of form modal
 		// console.log(fdn); 
-		$('main section:nth-child('+fdn+') div').each(function(key){   				   // each function over div of section of main, according to the selected option from heading of form modal
+		$('main section:nth-child('+fdn+') div h3').each(function(key){   				   // each function over div of section of main, according to the selected option from heading of form modal
 			var zxc = $(this).text().replace("X", " ");												   // text of particular div  
 			key = key+1
 			// console.log(zxc);
@@ -58,47 +58,83 @@ $(document).ready(function(){
 		var vlu = $('.vl').val();
 		var opn = $('.opt').val();
 		if (fmin == 'checkbox'){
-			var opns = opn.split(',');
-			$(opns).each(function(key){	
+			if ($("#disable").is(':checked')){
+				var opns = opn.split(',');												 // split function used to split values seprated by comas
+				$(opns).each(function(key){	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');            // to append subheadings as per selected input
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("disabled", true);		
+				});
+			}else{
+				var opns = opn.split(',');	
+				console.log(opns);											 // split function used to split values seprated by comas
+				$(opns).each(function(key){	
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+
 			});
+			}
 		}
 		else if (fmin == 'radio'){
-			var opns = opn.split(',');
-			$(opns).each(function(key){	
+			if ($("#disable").is(':checked')){
+				var opns = opn.split(',');
+				$(opns).each(function(key){	
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
-			});
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("disabled", true);
+				});
+			}else{
+				var opns = opn.split(',');
+				$(opns).each(function(key){	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+				});
+			}
 		}
 		else if  (fmin == 'select'){
-			var opns = opn.split(',');
-			var p = $('<select><option>select</option></select>');
-			for (i=0; i< opns.length; i++){
-				var p = $(p).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
+			if ($("#disable").is(':checked')){
+				var opns = opn.split(',');
+				var p = $('<select><option>select</option></select>');
+				for (i=0; i< opns.length; i++){
+					var p = $(p).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(p);	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') select').prop("disable", true);			
+				};
+			}	
+			else{
+				var opns = opn.split(',');
+				var p = $('<select><option>select</option></select>');
+				for (i=0; i< opns.length; i++){
+					var p = $(p).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(p);	
+				};
 			}
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(p);			
 		}
-		else if (fmin = 'textarea'){
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'">');
+
+		else if (fmin =='textarea'){
+			if ($("#disable").is(':checked')){
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'">');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("disabled", true);
+			}else{
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'">');
+				
+
+			}
 		}
-		else{	
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');			// to append main>section>div to store input values
+		else{
+			if ($("#disable").is(':checked')){
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("disabled", true);
+			}else{
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');
+			}
 		}
 		$('#exampleModal2').modal('hide');
 	});
 });
 
 function myfunction(thisd){
-	var z = $(thisd).parent().parent().remove();
+	var z = $(thisd).parent().parent().remove();               							// function created to remove particular heading or subheading
 }
-function myFunction(thi){
-	var y = $(thi).parent().parent().remove();
-}
+
 	
 
 	
-
-
-
-
 
 
