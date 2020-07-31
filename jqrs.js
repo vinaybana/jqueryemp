@@ -61,10 +61,26 @@ $(document).ready(function(){
 			if ($("#disable").is(':checked')){
 				var opns = opn.split(',');												 // split function used to split values seprated by comas
 				$(opns).each(function(key){	
-				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');            // to append subheadings as per selected input
+					$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');            // to append subheadings as per selected input
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("disabled", true);		
 				});
-			}else{
+			}
+			else if ($("#readonly").is(':checked')){
+				var opns = opn.split(',');												 // split function used to split values seprated by comas
+				$(opns).each(function(key){	
+					$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');            // to append subheadings as per selected input
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("readonly", true);		
+				});
+
+			}
+			else if ($("#required").is(':checked')){
+				var opns = opn.split(',');												 // split function used to split values seprated by comas
+				$(opns).each(function(key){	
+					$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');            // to append subheadings as per selected input
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("required", true);		
+				});
+			}
+			else{
 				var opns = opn.split(',');	
 				console.log(opns);											 // split function used to split values seprated by comas
 				$(opns).each(function(key){	
@@ -77,10 +93,25 @@ $(document).ready(function(){
 			if ($("#disable").is(':checked')){
 				var opns = opn.split(',');
 				$(opns).each(function(key){	
-				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+					$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("disabled", true);
 				});
-			}else{
+			}
+			else if ($("#readonly").is(':checked')){
+				var opns = opn.split(',');
+				$(opns).each(function(key){	
+					$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("readonly", true);
+				});
+			}
+			else if ($("#required").is(':checked')){
+				var opns = opn.split(',');
+				$(opns).each(function(key){	
+					$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("required", true);
+				});
+			}
+			else{
 				var opns = opn.split(',');
 				$(opns).each(function(key){	
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
@@ -96,7 +127,25 @@ $(document).ready(function(){
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(p);	
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+') select').prop("disable", true);			
 				};
-			}	
+			}
+			else if ($("#readonly").is(':checked')){	
+				var opns = opn.split(',');
+				var p = $('<select><option>select</option></select>');
+				for (i=0; i< opns.length; i++){
+					var p = $(p).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(p);	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') select').prop("readonly", true);			
+				};
+			}
+			else if ($("#required").is(':checked')){	
+				var opns = opn.split(',');
+				var p = $('<select><option>select</option></select>');
+				for (i=0; i< opns.length; i++){
+					var p = $(p).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(p);	
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') select').prop("required", true);			
+				};
+			}
 			else{
 				var opns = opn.split(',');
 				var p = $('<select><option>select</option></select>');
@@ -111,17 +160,33 @@ $(document).ready(function(){
 			if ($("#disable").is(':checked')){
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'">');
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("disabled", true);
-			}else{
+			}
+			else if ($("#readonly").is(':checked')){
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'">');
-				
-
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("readonly", true);
+			}
+			else if ($("#required").is(':checked')){
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'">');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("required", true);
+			}
+			else{
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'">');
 			}
 		}
 		else{
 			if ($("#disable").is(':checked')){
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("disabled", true);
-			}else{
+			}
+			else if ($("#readonly").is(':checked')){
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("readonly", true);
+			}
+			else if ($("#required").is(':checked')){
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+') input').prop("required", true);
+			}
+			else{
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'">');
 			}
 		}
