@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var elearr = [];
 	$("#exampleModal .btn-primary").click(function(event){
 		// $(".enc").submit(function(event){
   //       	event.preventDefault();
@@ -17,7 +18,10 @@ $(document).ready(function(){
 			$(".sbhdng select").append('<option value="'+key+'">'+hdd+'</option>');	   // dynamically value and text created for option of select
 			$(".frmhdg select").append('<option value="'+key+'">'+hdd+'</option>');	
 		});
-		$('#exampleModal').modal('hide');												// to hide heading modal
+		$('#exampleModal').modal('hide');	
+		elearr.push({'title':valu, 'subheading':[]})
+		console.log(elearr);
+		// localStorage.setItem(key, hdd);											
 	});
  
 	$('#exampleModal1 .btn-primary').click(function(){
@@ -26,6 +30,8 @@ $(document).ready(function(){
 		// console.log(hdn);
 		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'<button onclick="myfunction(this)">X</button></h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
 		$('#exampleModal1').modal('hide');
+		elearr[hdn-1].subheading.push({'title':headi, 'form':[]})
+		console.log(elearr);
 	});
 
 
@@ -58,11 +64,13 @@ $(document).ready(function(){
 		if (fmin == 'checkbox'){
 			var opns = opn.split(',');																		// to split values by commas
 			var aw = $('<p></p>');
-			console.log(opns);											 
+			// console.log(opns);											 
 			$(opns).each(function(key){	
 				$(aw).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);
 			});
+		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+		console.log(elearr);
 		}
 		else if (fmin == 'radio'){
 				var opns = opn.split(',');
@@ -71,6 +79,8 @@ $(document).ready(function(){
 					$(fr).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(fr);
 				});	
+		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+		console.log(elearr);
 		}
 		else if  (fmin == 'select'){
 				var opns = opn.split(',');
@@ -81,19 +91,25 @@ $(document).ready(function(){
 					var aw = $(aw).append(ae);
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
 				};
+		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+		console.log(elearr);
 		}
 		else if (fmin =='textarea'){
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'"></p>');
+		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+		console.log(elearr);
 		}
 		else{
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'"></p>');
+		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+		console.log(elearr);
 		}
 		if ($("#disable").is(':checked')){
 			var ddd = fmin
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio' || fmin == 'textarea' || fmin == 'select'){
 				var ddd = 'input'
 				var aaa = $('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).val();
-				console.log(aaa);
+				// console.log(aaa);
 				if (fmin == 'select'){
 					var ddd = 'select'
 					$('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).prop('disabled', true);
