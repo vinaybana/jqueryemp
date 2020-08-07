@@ -94,9 +94,11 @@ $(document).ready(function(){
 				var opns = opn.split(',');
 				var aw = $('<p></p>')
 				var ae = $('<select><option>select</option></select>');
+				var kj = ('<label>'+lbl+'</label>')
 				for (i=0; i< opns.length; i++){
 					var ae = $(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
-					var aw = $(aw).append(ae);
+					var kj = $(kj).append(ae);
+					var aw = $(aw).append(kj);
 				//  	elearr[fsh-1].subheading[fss-2].form.push({'<p><option value='opns[i]'>'opns[i]'</option></p>'})
 				// console.log(elearr);
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
