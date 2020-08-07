@@ -3,9 +3,9 @@ $(document).ready(function(){
 		console.log("zczczczzc");
 		var ee = JSON.parse(localStorage.getItem('elearr'));
 		$(ee).each(function(index,value){
-			$('main').append('<section><h2>'+value.title+'</h2></section>');
+			$('main').append('<section><h2>'+value.title+'<button onclick="myfunction(this)">X</button></h2></section>');
 			$(value.subheading).each(function(index,value){
-				$('main section h2').append('<div><h3>'+value.title+'</h3></div>');
+				$('main section h2').append('<div><h3>'+value.title+'<button onclick="myfunction(this)">X</button></h3></div>');
 				$(value.form).each(function(index,value){
 					$('main section div').append('<p><label>'+value.label+'</label><input type="'+value.input+'" value="'+value.value+'" name="'+value.name+'"></p>');
 				});
@@ -36,7 +36,6 @@ $(document).ready(function(){
 		event.preventDefault();
 		var headi = $('#sub-heading-name').val();  										// get value of input of sub heading modal
 		var hdn = $(".sbhdng select option:selected").val(); 							// to get value of selected option for select
-		// console.log(hdn);
 		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'<button onclick="myfunction(this)">X</button></h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
 		$('#exampleModal1').modal('hide');
 		elearr[hdn-1].subheading.push({'title':headi, 'form':[]})
@@ -118,8 +117,6 @@ $(document).ready(function(){
 			var ddd = fmin
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio' || fmin == 'textarea' || fmin == 'select'){
 				var ddd = 'input'
-				var aaa = $('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).val();
-				// console.log(aaa);
 				if (fmin == 'select'){
 					var ddd = 'select'
 					$('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).prop('disabled', true);
