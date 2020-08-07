@@ -2,8 +2,6 @@ $(document).ready(function(){
 	if(localStorage.getItem('elearr')){
 		console.log("zczczczzc");
 		var ee = JSON.parse(localStorage.getItem('elearr'));
-		// var na = (ee).split(',');
-		// console.log(na);
 		$(ee).each(function(index,value){
 			$('main').append('<section><h2>'+value.title+'</h2></section>');
 			$(value.subheading).each(function(index,value){
@@ -15,13 +13,8 @@ $(document).ready(function(){
 		});
 	}
 	var elearr = [];
-
-	
-	$("#exampleModal .btn-primary").click(function(event){
-		// $(".enc").submit(function(event){
-  //       	event.preventDefault();
-  //       	$("#exampleModal .enc").submit();
-  //       });
+	$("#exampleModal").submit(function(event){
+  		event.preventDefault();
     	var valu = $('#heading-name').val();  											// get value of input of heading modal
     	$('main').append('<section><h2>'+valu+'<button onclick="myfunction(this)">X</button></h2></section>');  	 // stores input of heading modal in h2 tag 
     	$(".sbhdng select option").remove();  					  						 // remove static values of option of select
@@ -30,18 +23,17 @@ $(document).ready(function(){
 		$(".frmhdg select").append('<option value=""></option>');       				  						
 		$('main section h2').each(function(key){
 			key=key+1	
-			var hdd=$(this).text().replace("X","");  
-			// console.log(hdd);    	
+			var hdd=$(this).text().replace("X","");     	
 			$(".sbhdng select").append('<option value="'+key+'">'+hdd+'</option>');	   // dynamically value and text created for option of select
 			$(".frmhdg select").append('<option value="'+key+'">'+hdd+'</option>');	
 		});
 		$('#exampleModal').modal('hide');	
 		elearr.push({'title':valu, 'subheading':[]})
-		console.log(elearr);
-												
+		console.log(elearr);											
 	});
  
-	$('#exampleModal1 .btn-primary').click(function(){
+	$('#exampleModal1').submit(function(){
+		event.preventDefault();
 		var headi = $('#sub-heading-name').val();  										// get value of input of sub heading modal
 		var hdn = $(".sbhdng select option:selected").val(); 							// to get value of selected option for select
 		// console.log(hdn);
@@ -50,7 +42,6 @@ $(document).ready(function(){
 		elearr[hdn-1].subheading.push({'title':headi, 'form':[]})
 		console.log(elearr);
 	});
-
 
 	$('.frmhdg select').change(function(){                     							// Chnage fnction works after some changes in element
 		$(".sbhdg select option").remove();
@@ -88,7 +79,6 @@ $(document).ready(function(){
 				console.log(elearr);
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
 			});
-		
 		}
 		else if (fmin == 'radio'){
 				var opns = opn.split(',');
@@ -99,7 +89,6 @@ $(document).ready(function(){
 					console.log(elearr);
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(fr);
 				});	
-		
 		}
 		else if  (fmin == 'select'){
 				var opns = opn.split(',');
@@ -108,12 +97,10 @@ $(document).ready(function(){
 				for (i=0; i< opns.length; i++){
 					var ae = $(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
 					var aw = $(aw).append(ae);
-				// 	elearr[fsh-1].subheading[fss-2].form.push({'<p><option value='opns[i]'>'opns[i]'</option></p>'})
+				//  	elearr[fsh-1].subheading[fss-2].form.push({'<p><option value='opns[i]'>'opns[i]'</option></p>'})
 				// console.log(elearr);
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
-				
 				};
-		
 		}
 		else if (fmin =='textarea'){
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'"></p>');
@@ -137,8 +124,6 @@ $(document).ready(function(){
 				}		
 			}
 		    $('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).prop('disabled', true);
-		    	
-
 		}
 		else if ($("#readonly").is(':checked')){
 			var ddd = fmin
@@ -149,8 +134,7 @@ $(document).ready(function(){
 					$('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).prop('readonly', true);
 				}
 			}
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).prop("readonly", true);
-				
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).prop("readonly", true);		
 		}   
 		else if ($("#required").is(':checked')){
 			var ddd = fmin
@@ -164,10 +148,8 @@ $(document).ready(function(){
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).prop("required", true);
 		}
 		$('#exampleModal2').modal('hide');
-		localStorage.setItem('elearr', JSON.stringify(elearr));
-		
+		localStorage.setItem('elearr', JSON.stringify(elearr));	
 	});
-
 });
 
 function myfunction(thisd){
