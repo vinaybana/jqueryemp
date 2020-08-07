@@ -6,11 +6,12 @@ $(document).ready(function(){
 		// console.log(na);
 		$(ee).each(function(index,value){
 			$('main').append('<section><h2>'+value.title+'</h2></section>');
-			// $(value.title).each(function(index,value){
-			// 	$('main section h2').append('<div><h3>'+value.title+'</h3></div>')
-			// });
-
-			console.log("ncxbmvbnvxb");
+			$(value.subheading).each(function(index,value){
+				$('main section h2').append('<div><h3>'+value.title+'</h3></div>');
+				$(value.form).each(function(index,value){
+					$('main section div').append('<p><label>'+value.label+'</label><input type="'+value.input+'" value="'+value.value+'" name="'+value.name+'"></p>');
+				});
+			});
 		});
 	}
 	var elearr = [];
@@ -83,20 +84,22 @@ $(document).ready(function(){
 			// console.log(opns);											 
 			$(opns).each(function(key){	
 				$(aw).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);
+				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+				console.log(elearr);
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
 			});
-		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
-		console.log(elearr);
+		
 		}
 		else if (fmin == 'radio'){
 				var opns = opn.split(',');
 				var fr = $('<p></p>');
 				$(opns).each(function(key){	
 					$(fr).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" name="'+nm+'">');
+					elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+					console.log(elearr);
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(fr);
 				});	
-		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
-		console.log(elearr);
+		
 		}
 		else if  (fmin == 'select'){
 				var opns = opn.split(',');
@@ -105,20 +108,22 @@ $(document).ready(function(){
 				for (i=0; i< opns.length; i++){
 					var ae = $(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
 					var aw = $(aw).append(ae);
+				// 	elearr[fsh-1].subheading[fss-2].form.push({'<p><option value='opns[i]'>'opns[i]'</option></p>'})
+				// console.log(elearr);
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
+				
 				};
-		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
-		console.log(elearr);
+		
 		}
 		else if (fmin =='textarea'){
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'"></p>');
-		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
-		console.log(elearr);
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+			console.log(elearr);
 		}
 		else{
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'"></p>');
-		elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
-		console.log(elearr);
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
+			console.log(elearr);
 		}
 		if ($("#disable").is(':checked')){
 			var ddd = fmin
@@ -145,6 +150,7 @@ $(document).ready(function(){
 				}
 			}
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).prop("readonly", true);
+				
 		}   
 		else if ($("#required").is(':checked')){
 			var ddd = fmin
