@@ -8,7 +8,8 @@ $(document).ready(function(){
 			$(value.subheading).each(function(index,value){
 				$('main section h2').append('<div><h3>'+value.title+'<button onclick="myfunction(this)">X</button></h3></div>');
 				$(value.form).each(function(index,value){
-					$('main section div').append('<p><label>'+value.label+'</label><input type="'+value.input+'" value="'+value.value+'" name="'+value.name+'"></p>');
+					$('main section div').append('<p><label>'+value.label+'</label><input type="'+value.input+'" class="'+value.class+'" value="'+value.value+'" name="'+value.name+'" option="'+value.option+'"><button onclick="myfunction(this)">X</button></p>');
+					
 				});
 			});
 		});
@@ -18,9 +19,9 @@ $(document).ready(function(){
     	var valu = $('#heading-name').val();  											// get value of input of heading modal
     	$('main').append('<section><h2>'+valu+'<button onclick="myfunction(this)">X</button></h2></section>');  	 // stores input of heading modal in h2 tag 
     	$(".sbhdng select option").remove();  					  						 // remove static values of option of select
-    	$(".sbhdng select").append('<option value="">select heading</option>'); 						 // create dynamic option for select
+    	$(".sbhdng select").append('<option value="select heading">select heading</option>'); 						 // create dynamic option for select
 		$(".frmhdg select option").remove();
-		$(".frmhdg select").append('<option value="">select heading</option>');       				  						
+		$(".frmhdg select").append('<option value="select heading">select heading</option>');       				  						
 		$('main section h2').each(function(key){
 			key=key+1	
 			var hdd=$(this).text().replace("X","");     	
@@ -29,7 +30,8 @@ $(document).ready(function(){
 		});
 		// $('#exampleModal').modal('hide');	
 		elearr.push({'title':valu, 'subheading':[]})
-		console.log(elearr);											
+		console.log(elearr);	
+		$('#heading-name').val('');									
 	});
  
 	$('.formsecond').submit(function(event){
@@ -40,11 +42,13 @@ $(document).ready(function(){
 		// $('#exampleModal1').modal('hide');
 		elearr[hdn-1].subheading.push({'title':headi, 'form':[]})
 		console.log(elearr);
+		$('#sub-heading-name').val('');
+		$('.sbhdng select').val('select heading')
 	});
 
 	$('.frmhdg select').change(function(){                     							// Chnage fnction works after some changes in element
 		$(".sbhdg select option").remove();
-		$(".sbhdg select").append('<option value="">select subheading</option>');
+		$(".sbhdg select").append('<option value="select sub-heading">select sub-heading</option>');
 		var fdn = $(".frmhdg select").val();       				       // to get value of selected option form heading of form modal 
 		$('main section:nth-child('+fdn+') div h3').each(function(key){   				   // each function over div of section of main, according to the selected option from heading of form modal
 			var zxc = $(this).text().replace("X", "");												   // X  in a text of particular div replaced with space  
@@ -69,7 +73,7 @@ $(document).ready(function(){
 			var opns = opn.split(',');																		// to split values by commas
 			var aw = $('<p></p>');										 
 			$(opns).each(function(key){	
-				$(aw).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" class = '+cls+' name="'+nm+'">');
+				$(aw).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" class = '+cls+' name="'+nm+'" ><button onclick="myfunction(this)">X</button>');
 				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'option': opn})
 				console.log(elearr);
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
@@ -79,8 +83,7 @@ $(document).ready(function(){
 				var opns = opn.split(',');
 				var fr = $('<p></p>');
 				$(opns).each(function(key){
-					console.log(key)
-					$(fr).append('<label>'+opns[key]+'</label><input type="'+fmin+'" class = '+cls+' value="'+vlu+'" name="'+nm+'">');
+					$(fr).append('<label>'+opns[key]+'</label><input type="'+fmin+'" class = '+cls+' value="'+vlu+'" name="'+nm+'"><button onclick="myfunction(this)">X</button>');
 					elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'option': opn})
 					console.log(elearr);
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(fr);
@@ -89,20 +92,23 @@ $(document).ready(function(){
 		else if  (fmin == 'select'){
 				var opns = opn.split(',');
 				var aw = $('<p><label>'+lbl+'</label></p>')
-				var ae = $('<select class='+cls+' name='+nm+'><option>select</option></select>').appendTo(aw);				for (i=0; i< opns.length; i++){
+				var ae = $('<select class='+cls+' name='+nm+'><option>select</option></select>').appendTo(aw);
+				var as = $('<button onclick="myfunction(this)">X</button>').appendTo(aw);				
+				for (i=0; i< opns.length; i++){
 					$(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
-				 	// elearr[fsh-1].subheading[fss-2].form.push({'<p><option value='opns[i]'>'opns[i]'</option></p>'})
+				//  	elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[i], 'name': nm, 'class': cls, 'value': vlu, 'option': opn})
 				// console.log(elearr);
+				
 				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
 				};
 		}
 		else if (fmin =='textarea'){
-				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'"></p>');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input name="'+nm+'" rows="4" cols="50" value="'+vlu+'"><button onclick="myfunction(this)">X</button></p>');
 			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
 			console.log(elearr);
 		}
 		else{
-				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'"></p>');
+				$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" class="'+cls+'" value="'+vlu+'"><button onclick="myfunction(this)">X</button></p>');
 			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
 			console.log(elearr);
 		}
@@ -112,6 +118,7 @@ $(document).ready(function(){
 				ddd = 'input'
 			}
 		    $('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).attr('disabled', 'disabled');		
+			elearr[fsh-1].subheading[fss-2].form.push({'disabled':'disabled'})
 		}
 		else if ($("#readonly").is(':checked')){
 			var ddd = fmin
@@ -129,6 +136,18 @@ $(document).ready(function(){
 		}
 		$('#exampleModal2').modal('hide');
 		localStorage.setItem('elearr', JSON.stringify(elearr));	
+		$(".frmhdg select").val('select heading');
+		$(".sbhdg select").val('select sub-heading'); 
+		$(".inpt select").val('select input');
+		$('.labl').val('');
+		$('.naam').val('');
+		$('.plhd').val('');
+		$('.clas').val('');
+		$('.vl').val('');
+		$('.opt').val('');
+		$("#disable").prop('checked', false);
+		$("#readonly").prop('checked', false);
+		$("#required").prop('checked', false);
 	});
 });
 
