@@ -149,14 +149,14 @@ $(document).ready(function(){
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio'){
 				ddd = 'input'
 			}
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).attr('readonly', 'readonly');		
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).attr({'readonly': 'readonly'});		
 		}   
 		else if ($("#required").is(':checked')){
 			var ddd = fmin
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio'){
 				ddd = 'input'	
 			}
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).prop('required', 'required');
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).prop({'required': 'required'});
 		}
 		// $('#exampleModal2').modal('hide');
 		localStorage.setItem('elearr', JSON.stringify(elearr));	
