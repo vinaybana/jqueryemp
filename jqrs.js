@@ -4,16 +4,13 @@ $(document).ready(function(){
 		console.log("zczczczzc");
 		var ee = JSON.parse(localStorage.getItem('elearr'));
 		$(ee).each(function(index,value){
-			console.log(index);
 			$('main').append('<section><h2>'+value.title+'<button onclick="MYfunction(this)">X</button></h2></section>');
 			$(value.subheading).each(function(index1,value1){
 				var zz = index+1;
-				console.log(value1.subtitle);
-				console.log(index);
 				$('main section:nth-child('+zz+')').append('<div><h3>'+value1.subtitle+'<button onclick="MYfunction(this)">X</button></h3></div>');
-				$(value.form).each(function(index2,value2){
-					index1 = index1+1;
-					$('main section:nth-child('+index+') div:nth-child('+index1+')').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option="'+value2.option+'"><button onclick="MYfunction(this)">X</button></p>');
+				$(value1.form).each(function(index2,value2){
+					var mm = index1+2;
+					$('main section:nth-child('+zz+') div:nth-child('+mm+') h3').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option="'+value2.option+'"><button onclick="MYfunction(this)">X</button></p>');
 					// $(value.select).each(function(index,value){
 						
 					// 		console.log(value);
@@ -51,9 +48,8 @@ $(document).ready(function(){
 		elearr.push({'title':valu, 'subheading':[]})
 		console.log(elearr);
 		localStorage.setItem('elearr', JSON.stringify(elearr));
-		// $('#exampleModal').modal('hide');	
-				
-		// $(".formfirst").reset();									
+		// $('#exampleModal').modal('hide');			
+		$('.formfirst')[0].reset()								
 	});
  
 	$('.formsecond').submit(function(event){
@@ -65,8 +61,7 @@ $(document).ready(function(){
 		elearr[hdn-1].subheading.push({'subtitle':headi, 'form':[]})
 		console.log(elearr);
 		localStorage.setItem('elearr', JSON.stringify(elearr));	
-		$('#sub-heading-name').val('');
-		$('.sbhdng select').val('select heading')
+		$('.formsecond')[0].reset()	
 	});
 
 	$('.frmhdg select').change(function(){                     							// Chnage fnction works after some changes in element
@@ -96,7 +91,7 @@ $(document).ready(function(){
 			var opns = opn.split(',');																		// to split values by commas
 			var aw = $('<p></p>');										 
 			$(opns).each(function(key){	
-				$(aw).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" class = '+cls+' name="'+nm+'" ><button onclick="myfunction(this)">X</button>');
+				$(aw).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" class = '+cls+' name="'+nm+'" ><button onclick="MYfunction(this)">X</button>');
 				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'option': opn})
 				console.log(elearr);
 			});
@@ -107,7 +102,7 @@ $(document).ready(function(){
 			var opns = opn.split(',');
 			var fr = $('<p></p>');
 			$(opns).each(function(key){
-				$(fr).append('<label>'+opns[key]+'</label><input type="'+fmin+'" class = '+cls+' value="'+vlu+'" name="'+nm+'"><button onclick="myfunction(this)">X</button>');
+				$(fr).append('<label>'+opns[key]+'</label><input type="'+fmin+'" class = '+cls+' value="'+vlu+'" name="'+nm+'"><button onclick="MYfunction(this)">X</button>');
 				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'option': opn})
 				console.log(elearr);
 			});	
@@ -118,7 +113,7 @@ $(document).ready(function(){
 			var opns = opn.split(',');
 			var aw = $('<p><label>'+lbl+'</label></p>')
 			var ae = $('<select class='+cls+' name='+nm+'><option>select</option></select>').appendTo(aw);
-			var as = $('<button onclick="myfunction(this)">X</button>').appendTo(aw);				
+			var as = $('<button onclick="MYfunction(this)">X</button>').appendTo(aw);				
 			for (i=0; i< opns.length; i++){
 				if(vlu  == opns[i]){
 				$(ae).append('<option value="'+opns[i]+'" selected =" selected">'+opns[i]+'</option>')
@@ -132,12 +127,12 @@ $(document).ready(function(){
 				
 		}
 		else if (fmin =='textarea'){
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append('<p><label>'+lbl+'</label><input name="'+nm+'" placeholder = "'+plchd+'" rows="4" cols="50" value="'+vlu+'"><button onclick="myfunction(this)">X</button></p>');
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append('<p><label>'+lbl+'</label><input name="'+nm+'" placeholder = "'+plchd+'" rows="4" cols="50" value="'+vlu+'"><button onclick="MYfunction(this)">X</button></p>');
 			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
 			console.log(elearr);
 		}
 		else{
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" placeholder = "'+plchd+'" class="'+cls+'" value="'+vlu+'"><button onclick="myfunction(this)">X</button></p>');
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" placeholder = "'+plchd+'" class="'+cls+'" value="'+vlu+'"><button onclick="MYfunction(this)">X</button></p>');
 			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
 			console.log(elearr);
 		}
@@ -165,24 +160,13 @@ $(document).ready(function(){
 		}
 		// $('#exampleModal2').modal('hide');
 		localStorage.setItem('elearr', JSON.stringify(elearr));	
-		$(".frmhdg select").val('select heading');
-		$(".sbhdg select").val('select sub-heading'); 
-		$(".inpt select").val('select input');
-		$('.labl').val('');
-		$('.naam').val('');
-		$('.plhd').val('');
-		$('.clas').val('');
-		$('.vl').val('');
-		$('.opt').val('');
-		$("#disable").prop('checked', false);
-		$("#readonly").prop('checked', false);
-		$("#required").prop('checked', false);
+		$('.formthird')[0].reset()
 	});
 });
-
 function myfunction(thisd){
 	var z = $(thisd).parent().parent().remove();               							// function created to remove particular heading or subheading
 };
 function MYfunction(thise){
-	var q = $(thise).parent().parent().parent().remove();  	
-}
+	var q = $(thise).parent().remove();  	
+};
+
