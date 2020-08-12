@@ -4,11 +4,16 @@ $(document).ready(function(){
 		console.log("zczczczzc");
 		var ee = JSON.parse(localStorage.getItem('elearr'));
 		$(ee).each(function(index,value){
+			console.log(index);
 			$('main').append('<section><h2>'+value.title+'<button onclick="MYfunction(this)">X</button></h2></section>');
-			$(value.subheading).each(function(index,value){
-				$('main section h2').append('<div><h3>'+value.subtitle+'<button onclick="MYfunction(this)">X</button></h3></div>');
-				$(value.form).each(function(index,value){
-					$('main section div').append('<p><label>'+value.label+'</label><input type="'+value.input+'" class="'+value.class+'" value="'+value.value+'" name="'+value.name+'" option="'+value.option+'"><button onclick="MYfunction(this)">X</button></p>');
+			$(value.subheading).each(function(index1,value1){
+				var zz = index+1;
+				console.log(value1.subtitle);
+				console.log(index);
+				$('main section:nth-child('+zz+')').append('<div><h3>'+value1.subtitle+'<button onclick="MYfunction(this)">X</button></h3></div>');
+				$(value.form).each(function(index2,value2){
+					index1 = index1+1;
+					$('main section:nth-child('+index+') div:nth-child('+index1+')').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option="'+value2.option+'"><button onclick="MYfunction(this)">X</button></p>');
 					// $(value.select).each(function(index,value){
 						
 					// 		console.log(value);
@@ -41,11 +46,13 @@ $(document).ready(function(){
 			var hdd=$(this).text().replace("X","");     	
 			$(".sbhdng select").append('<option value="'+key+'">'+hdd+'</option>');	   // dynamically value and text created for option of select
 			$(".frmhdg select").append('<option value="'+key+'">'+hdd+'</option>');	
+			
 		});
-		// $('#exampleModal').modal('hide');	
 		elearr.push({'title':valu, 'subheading':[]})
 		console.log(elearr);
-		localStorage.setItem('elearr', JSON.stringify(elearr));		
+		localStorage.setItem('elearr', JSON.stringify(elearr));
+		// $('#exampleModal').modal('hide');	
+				
 		// $(".formfirst").reset();									
 	});
  
@@ -93,7 +100,7 @@ $(document).ready(function(){
 				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'option': opn})
 				console.log(elearr);
 			});
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append(aw);	
 			
 		}
 		else if (fmin == 'radio'){
@@ -104,7 +111,7 @@ $(document).ready(function(){
 				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'option': opn})
 				console.log(elearr);
 			});	
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(fr);
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append(fr);
 			
 		}
 		else if  (fmin == 'select'){
@@ -121,16 +128,16 @@ $(document).ready(function(){
 			}
 				// elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'select':[{'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option':opns}]})
 			// console.log(elearr);
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append(aw);	
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append(aw);	
 				
 		}
 		else if (fmin =='textarea'){
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input name="'+nm+'" placeholder = "'+plchd+'" rows="4" cols="50" value="'+vlu+'"><button onclick="myfunction(this)">X</button></p>');
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append('<p><label>'+lbl+'</label><input name="'+nm+'" placeholder = "'+plchd+'" rows="4" cols="50" value="'+vlu+'"><button onclick="myfunction(this)">X</button></p>');
 			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
 			console.log(elearr);
 		}
 		else{
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+')').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" placeholder = "'+plchd+'" class="'+cls+'" value="'+vlu+'"><button onclick="myfunction(this)">X</button></p>');
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" placeholder = "'+plchd+'" class="'+cls+'" value="'+vlu+'"><button onclick="myfunction(this)">X</button></p>');
 			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'option': opn})
 			console.log(elearr);
 		}
@@ -176,6 +183,6 @@ $(document).ready(function(){
 function myfunction(thisd){
 	var z = $(thisd).parent().parent().remove();               							// function created to remove particular heading or subheading
 };
-function MYfunction(thisd){
-	var q = $(thisd).remove();  	
+function MYfunction(thise){
+	var q = $(thise).parent().parent().parent().remove();  	
 }
