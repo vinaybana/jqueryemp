@@ -14,22 +14,24 @@ $(document).ready(function(){
 
 					// $('main section:nth-child('+zz+') div:nth-child('+mm+') h3').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option = "'+value2.option+'"><button onclick="MYfunction(this)">X</button></p>');
 					if (value2.input == 'select' ){
-						$(value2.select).each(function(index3,value3){
-							console.log(index3);
-							console.log(value3);
-							console.log(value2.select);
-							var aw = $('<p><label>'+value2.label+'</label></p>')
-							var ae = $('<select class='+value2.class+' name='+value2.name+'><option>select</option></select>').appendTo(aw);
-							var as = $('<button onclick="MYfunction(this)">X</button>').appendTo(aw);
-							var tt = value2.select;
-							console.log(tt);
-							for (i=0; i<tt.length; i++){
-								$(ae).append('<option value="'+value3.option[i]+'">'+value3.option[i]+'</option>')
+						console.log(value2);
+						console.log(value2.option);
+						var opns = (value2.option).split(',');
+						console.log(opns);
+						// $(value2.select).each(function(index3,value3){
+						// console.log(index3);
+						// console.log(value3);
+						
+						var aw = $('<p><label>'+value2.label+'</label></p>')
+						var ae = $('<select class='+value2.class+' name='+value2.name+'><option>select</option></select>').appendTo(aw);
+						var as = $('<button onclick="MYfunction(this)">X</button>').appendTo(aw);
+						for (i=0; i<opns.length; i++){
+							$(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
 
-							}
-							$('main section:nth-child('+zz+') div:nth-child('+mm+') h3').append(aw);
-							index3=+1;
-						});
+						}
+						$('main section:nth-child('+zz+') div:nth-child('+mm+') h3').append(aw);
+						// index3=+1;
+						// });
 					}else{
 						$('main section:nth-child('+zz+') div:nth-child('+mm+') h3').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option = "'+value2.option+'"><button onclick="MYfunction(this)">X</button></p>');	
 					}
@@ -127,10 +129,10 @@ $(document).ready(function(){
 					// elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option':opns[i], 'selected' :" selected" })
 				}else{
 					$(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
-					elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'select':[{'option':opns[i]}]})
+					// elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option': opns[i]})
 				}	
 			}
-			// elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option':[{opns}]})
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option': opns})
 			console.log(elearr);
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append(aw);	
 				
