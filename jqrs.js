@@ -10,18 +10,12 @@ $(document).ready(function(){
 				$('main section:nth-child('+zz+')').append('<div><h3>'+value1.subtitle+'<button onclick="MYfunction(this)">X</button></h3></div>');
 				$(value1.form).each(function(index2,value2){
 					var mm = index1+2;
-					// console.log(value2.option);
-
-					// $('main section:nth-child('+zz+') div:nth-child('+mm+') h3').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option = "'+value2.option+'"><button onclick="MYfunction(this)">X</button></p>');
+					console.log(value2.input);
+					console.log(value2);
+					console.log(value2.option);
 					if (value2.input == 'select' ){
-						console.log(value2);
-						console.log(value2.option);
-						var opns = (value2.option).split(',');
+						var opns = value2.option
 						console.log(opns);
-						// $(value2.select).each(function(index3,value3){
-						// console.log(index3);
-						// console.log(value3);
-						
 						var aw = $('<p><label>'+value2.label+'</label></p>')
 						var ae = $('<select class='+value2.class+' name='+value2.name+'><option>select</option></select>').appendTo(aw);
 						var as = $('<button onclick="MYfunction(this)">X</button>').appendTo(aw);
