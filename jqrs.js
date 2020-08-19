@@ -10,24 +10,18 @@ $(document).ready(function(){
 				$('main section:nth-child('+zz+')').append('<div><h3>'+value1.subtitle+'<button onclick="MYfunction(this)">X</button></h3></div>');
 				$(value1.form).each(function(index2,value2){
 					var mm = index1+2;
-					console.log(value2.input);
-					console.log(value2);
-					console.log(value2.option);
 					if (value2.input == 'select' ){
+						var vlu = $('.vl').val();
 						var opns = value2.option
-						console.log(opns);
 						var aw = $('<p><label>'+value2.label+'</label></p>')
 						var ae = $('<select class='+value2.class+' name='+value2.name+'><option>select</option></select>').appendTo(aw);
 						var as = $('<button onclick="MYfunction(this)">X</button>').appendTo(aw);
 						for (i=0; i<opns.length; i++){
-							$(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
-
+								$(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')		
 						}
-						$('main section:nth-child('+zz+') div:nth-child('+mm+') h3').append(aw);
-						// index3=+1;
-						// });
+						$('main section:nth-child('+zz+') div:nth-child('+mm+') ').append(aw);
 					}else{
-						$('main section:nth-child('+zz+') div:nth-child('+mm+') h3').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option = "'+value2.option+'"><button onclick="MYfunction(this)">X</button></p>');	
+						$('main section:nth-child('+zz+') div:nth-child('+mm+') ').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option = "'+value2.option+'" disable = "'+value2.dis+'"  readonly = "'+value2.read+'"  required = "'+value2.req+'"><button onclick="MYfunction(this)">X</button></p>');		
 					}
 				});
 			});
@@ -90,15 +84,19 @@ $(document).ready(function(){
 		var cls = $('.clas').val();
 		var vlu = $('.vl').val();
 		var opn = $('.opt').val();
+		var dis = false;
+		var read = false;
+		var req = false;
+		console.log(dis);
 		if (fmin == 'checkbox'){
 			var opns = opn.split(',');																		// to split values by commas
 			var aw = $('<p></p>');										 
 			$(opns).each(function(key){	
 				$(aw).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" class = '+cls+' name="'+nm+'" ><button onclick="MYfunction(this)">X</button>');
-				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu})
+				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'dis': dis, 'read': read, 'req': req})
 				console.log(elearr);
 			});
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append(aw);	
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append(aw);	
 			
 		}
 		else if (fmin == 'radio'){
@@ -106,10 +104,10 @@ $(document).ready(function(){
 			var fr = $('<p></p>');
 			$(opns).each(function(key){
 				$(fr).append('<label>'+opns[key]+'</label><input type="'+fmin+'" class = '+cls+' value="'+vlu+'" name="'+nm+'"><button onclick="MYfunction(this)">X</button>');
-				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu})
+				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'dis': dis, 'read': read, 'req': req})
 				console.log(elearr);
 			});	
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append(fr);
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append(fr);
 			
 		}
 		else if  (fmin == 'select'){
@@ -120,25 +118,23 @@ $(document).ready(function(){
 			for (i=0; i< opns.length; i++){
 				if(vlu  == opns[i]){
 					$(ae).append('<option value="'+opns[i]+'" selected =" selected">'+opns[i]+'</option>')
-					// elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option':opns[i], 'selected' :" selected" })
 				}else{
-					$(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')
-					// elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option': opns[i]})
+					$(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')	
 				}	
 			}
-			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option': opns})
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option': opns, 'dis': dis, 'read': read, 'req': req})
 			console.log(elearr);
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append(aw);	
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append(aw);	
 				
 		}
 		else if (fmin =='textarea'){
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append('<p><label>'+lbl+'</label><input name="'+nm+'" placeholder = "'+plchd+'" rows="4" cols="50" value="'+vlu+'"><button onclick="MYfunction(this)">X</button></p>');
-			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu})
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append('<p><label>'+lbl+'</label><input name="'+nm+'" placeholder = "'+plchd+'" rows="4" cols="50" value="'+vlu+'"><button onclick="MYfunction(this)">X</button></p>');
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'dis': dis, 'read': read, 'req': req})
 			console.log(elearr);
 		}
 		else{
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') h3').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" placeholder = "'+plchd+'" class="'+cls+'" value="'+vlu+'"><button onclick="MYfunction(this)">X</button></p>');
-			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu})
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" placeholder = "'+plchd+'" class="'+cls+'" value="'+vlu+'"><button onclick="MYfunction(this)">X</button></p>');
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'dis': dis, 'read': read, 'req': req})
 			console.log(elearr);
 		}
 		if ($("#disable").is(':checked')){
@@ -147,21 +143,23 @@ $(document).ready(function(){
 				ddd = 'input'
 			}
 		    $('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).attr('disabled', 'disabled');		
-			elearr[fsh-1].subheading[fss-2].form.push({'disabled':'disabled'})
+			elearr[fsh-1].subheading[fss-2].form.push({'dis': true})
 		}
-		else if ($("#readonly").is(':checked')){
+		if ($("#readonly").is(':checked')){
 			var ddd = fmin
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio'){
 				ddd = 'input'
 			}
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).attr({'readonly': 'readonly'});		
+			elearr[fsh-1].subheading[fss-2].form.push({'read':true})
 		}   
-		else if ($("#required").is(':checked')){
+		if ($("#required").is(':checked')){
 			var ddd = fmin
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio'){
 				ddd = 'input'	
 			}
-			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).prop({'required': 'required'});
+			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).attr({'required': 'required'});
+			elearr[fsh-1].subheading[fss-2].form.push({'req':true})
 		}
 		// $('#exampleModal2').modal('hide');
 		localStorage.setItem('elearr', JSON.stringify(elearr));	
