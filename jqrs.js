@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	var elearr = [];
 	if(localStorage.getItem('elearr')){
-		console.log("zczczczzc");
 		var ee = JSON.parse(localStorage.getItem('elearr'));
 		$(ee).each(function(index,value){
 			$('main').append('<section><h2>'+value.title+'<button onclick="MYfunction(this)">X</button></h2></section>');
@@ -21,7 +20,10 @@ $(document).ready(function(){
 						}
 						$('main section:nth-child('+zz+') div:nth-child('+mm+') ').append(aw);
 					}else{
-						$('main section:nth-child('+zz+') div:nth-child('+mm+') ').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option = "'+value2.option+'" disable = "'+value2.dis+'"  readonly = "'+value2.read+'"  required = "'+value2.req+'"><button onclick="MYfunction(this)">X</button></p>');		
+						if(value2.dis==true){
+							$('main section:nth-child('+zz+') div:nth-child('+mm+') ').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option = "'+value2.option+'" disabled="'+disabled+'"><button onclick="MYfunction(this)">X</button></p>');
+						}
+						$('main section:nth-child('+zz+') div:nth-child('+mm+') ').append('<p><label>'+value2.label+'</label><input type="'+value2.input+'" class="'+value2.class+'" value="'+value2.value+'" name="'+value2.name+'" option = "'+value2.option+'"><button onclick="MYfunction(this)">X</button></p>');		
 					}
 				});
 			});
@@ -29,7 +31,7 @@ $(document).ready(function(){
 	}
 	$(".formfirst").submit(function(event){
   		event.preventDefault();
-    	var valu = $('#heading-name').val();  											// get value of input of heading modal
+    	var valu = $('.heading-name').val();  											// get value of input of heading modal
     	$('main').append('<section><h2>'+valu+'<button onclick="myfunction(this)">X</button></h2></section>');  	 // stores input of heading modal in h2 tag 
     	$(".sbhdng select option").remove();  					  						 // remove static values of option of select
     	$(".sbhdng select").append('<option value="select heading">select heading</option>'); 						 // create dynamic option for select
@@ -43,20 +45,16 @@ $(document).ready(function(){
 			
 		});
 		elearr.push({'title':valu, 'subheading':[]})
-		console.log(elearr);
-		localStorage.setItem('elearr', JSON.stringify(elearr));
-		// $('#exampleModal').modal('hide');			
+		localStorage.setItem('elearr', JSON.stringify(elearr));		
 		$('.formfirst')[0].reset()								
 	});
  
 	$('.formsecond').submit(function(event){
 		event.preventDefault();
-		var headi = $('#sub-heading-name').val();  										// get value of input of sub heading modal
+		var headi = $('.sub-heading-name').val();  										// get value of input of sub heading modal
 		var hdn = $(".sbhdng select").val(); 							// to get value of selected option for select
 		$('main section:nth-child('+hdn+')').append('<div><h3>'+headi+'<button onclick="myfunction(this)">X</button></h3></div>');  // stores input of sub heading fot a particular section with an h3 tag 
-		// $('#exampleModal1').modal('hide');
 		elearr[hdn-1].subheading.push({'subtitle':headi, 'form':[]})
-		console.log(elearr);
 		localStorage.setItem('elearr', JSON.stringify(elearr));	
 		$('.formsecond')[0].reset()	
 	});
@@ -87,14 +85,15 @@ $(document).ready(function(){
 		var dis = false;
 		var read = false;
 		var req = false;
-		console.log(dis);
+		// function changedefault(index, value3){
+		// 	elearr[fsh-1].subheading[fss-2].form.dis =true;
+		// }
 		if (fmin == 'checkbox'){
 			var opns = opn.split(',');																		// to split values by commas
 			var aw = $('<p></p>');										 
 			$(opns).each(function(key){	
 				$(aw).append('<label>'+opns[key]+'</label><input type="'+fmin+'" value="'+vlu+'" class = '+cls+' name="'+nm+'" ><button onclick="MYfunction(this)">X</button>');
-				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'dis': dis, 'read': read, 'req': req})
-				console.log(elearr);
+				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'disabled': dis, 'readonly': read, 'required': req})
 			});
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append(aw);	
 			
@@ -104,8 +103,7 @@ $(document).ready(function(){
 			var fr = $('<p></p>');
 			$(opns).each(function(key){
 				$(fr).append('<label>'+opns[key]+'</label><input type="'+fmin+'" class = '+cls+' value="'+vlu+'" name="'+nm+'"><button onclick="MYfunction(this)">X</button>');
-				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'dis': dis, 'read': read, 'req': req})
-				console.log(elearr);
+				elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': opns[key], 'name': nm, 'class': cls, 'value': vlu, 'disabled': dis, 'readonly': read, 'required': req})
 			});	
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append(fr);
 			
@@ -122,30 +120,31 @@ $(document).ready(function(){
 					$(ae).append('<option value="'+opns[i]+'">'+opns[i]+'</option>')	
 				}	
 			}
-			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option': opns, 'dis': dis, 'read': read, 'req': req})
-			console.log(elearr);
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'class': cls, 'option': opns, 'disabled': dis, 'readonly': read, 'required': req})
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append(aw);	
 				
 		}
 		else if (fmin =='textarea'){
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append('<p><label>'+lbl+'</label><input name="'+nm+'" placeholder = "'+plchd+'" rows="4" cols="50" value="'+vlu+'"><button onclick="MYfunction(this)">X</button></p>');
-			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'dis': dis, 'read': read, 'req': req})
-			console.log(elearr);
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'disabled': dis, 'readonly': read, 'required': req})
 		}
 		else{
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') ').append('<p><label>'+lbl+'</label><input type="'+fmin+'" name="'+nm+'" placeholder = "'+plchd+'" class="'+cls+'" value="'+vlu+'"><button onclick="MYfunction(this)">X</button></p>');
-			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'dis': dis, 'read': read, 'req': req})
-			console.log(elearr);
+			elearr[fsh-1].subheading[fss-2].form.push({'input':fmin, 'label': lbl, 'name': nm, 'placeholder': plchd, 'class': cls, 'value': vlu, 'disabled': dis, 'readonly': read, 'required': req})
 		}
-		if ($("#disable").is(':checked')){
+		if ($(".disable").is(':checked')){
 			var ddd = fmin
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio'){
 				ddd = 'input'
 			}
-		    $('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).attr('disabled', 'disabled');		
-			elearr[fsh-1].subheading[fss-2].form.push({'dis': true})
+		    $('main section:nth-child('+fsh+') div:nth-child('+fss+')  p:last-child '+ddd ).attr('disabled', 'disabled');	
+		    elearr[fsh-1].subheading[fss-2].form.push({'dis':true})	
+		    // elearr[fsh-1].subheading[fss-2].form.dis =true;
+		    // console.log(elearr)
+
+			// elearr[fsh-1].subheading[fss-2].form.push({'dis':true})
 		}
-		if ($("#readonly").is(':checked')){
+		if ($(".readonly").is(':checked')){
 			var ddd = fmin
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio'){
 				ddd = 'input'
@@ -153,7 +152,7 @@ $(document).ready(function(){
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).attr({'readonly': 'readonly'});		
 			elearr[fsh-1].subheading[fss-2].form.push({'read':true})
 		}   
-		if ($("#required").is(':checked')){
+		if ($(".required").is(':checked')){
 			var ddd = fmin
 			if (fmin == 'email' || fmin == 'number' || fmin == 'text' || fmin == 'button' || fmin == 'checkbox' || fmin == 'file' || fmin == 'radio'){
 				ddd = 'input'	
@@ -161,14 +160,22 @@ $(document).ready(function(){
 			$('main section:nth-child('+fsh+') div:nth-child('+fss+') p:last-child '+ddd).attr({'required': 'required'});
 			elearr[fsh-1].subheading[fss-2].form.push({'req':true})
 		}
-		// $('#exampleModal2').modal('hide');
-		localStorage.setItem('elearr', JSON.stringify(elearr));	
+		localStorage.setItem('elearr', JSON.stringify(elearr));
 		$('.formthird')[0].reset()
 	});
-	function myfunction(thisd){
-	var z = $(thisd).parent().parent().remove();               							// function created to remove particular heading or subheading
-};
+	
 });
+
+function myfunction(thisd){
+	var z = $(thisd).parent().parent().remove();               							// function created to remove particular heading or subheading
+	var a = $(thisd).parent().text();
+	var w = $(".sbhdng select option").text();
+	console.log(w)
+	$(w).each(function(c,v){
+		console.log(c,v)
+	})
+
+};
 
 function MYfunction(thise){
 	var q = $(thise).parent().remove();  	
