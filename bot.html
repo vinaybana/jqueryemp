@@ -12,10 +12,10 @@
 
 		<title> JQUERY TEST!</title>
 		<style>
-		body button{margin-left: 90px;}
-		main{margin-left: 70px; margin-top: 30px;}
-		main button{width: 25px; height: 25px; font-size: 20px; padding: 0px 0px 0px 0px; margin-left: 0px;}
-		p button{width: 20px; height: 20px; font-size: 14px; padding: 0px 0px 0px 0px; margin-left: 0px;}
+			body button{margin-left: 90px;}
+			main{margin-left: 70px; margin-top: 30px;}
+			main button{width: 25px; height: 25px; font-size: 20px; padding: 0px 0px 0px 0px; margin-left: 0px;}
+			p button{width: 20px; height: 20px; font-size: 14px; padding: 0px 0px 0px 0px; margin-left: 0px;}
 		</style>
 	</head>
 	<body>
@@ -63,18 +63,16 @@
 
 					<form class="formsecond">
 						<div class="container">
-							<!-- <h2>Sub headings</h2> -->
-							<!-- <p>Select heading here</p> -->
 							<div class="dropdown sbhdng">  
 								<select class="form-control">
 									<option value="">--select--</option>
 								</select>
 							</div>
 							<div class="modal-body">
-									<div class="form-group">
-										<label for="sub-heading-name" class="col-form-label">Sub heading</label>
-										<input type="text" class="form-control sub-heading-name" id="sub-heading-name">
-									</div>
+								<div class="form-group">
+									<label for="sub-heading-name" class="col-form-label">Sub heading</label>
+									<input type="text" class="form-control sub-heading-name" id="sub-heading-name">
+								</div>
 							</div>
 							<div class="modal-footer sbhd">
 								<button type="submit" class="btn btn-primary">Submit</button>
@@ -96,54 +94,51 @@
 					<form class="formthird">
 						<div class="container">
 							<p>Select heading here</p>
-								<div class="dropdown frmhdg">  
-									<select class="form-control">
-										<option value="select heading">select heading</option>
-									</select>
-								</div><br>
-								<p>Select Sub-heading here</p>
-								<div class="dropdown sbhdg">  
-									<select class="form-control">
-										<option value="select sub-heading">select sub-heading</option>
-									</select>
-								</div><br>
-								<p>Select input here</p>
-								<div class="dropdown inpt">  
-									<select class="form-control">
-										<option value="select input">select input</option>
-										<option value="email">Email</option>
-										<option value="number">Number</option>
-										<option value="text">Text</option>
-										<option value="button">Button</option>
-										<option value="checkbox">Checkbox</option>
-										<option value="file">File</option>	
-										<option value="radio">Radio</option>
-										<option value="textarea">textarea</option>	
-										<option value="select">select</option>
-									</select>
+							<div class="dropdown frmhdg">  
+								<select class="form-control">
+									<option value="select heading">select heading</option>
+								</select>
+							</div><br>
+							<p>Select Sub-heading here</p>
+							<div class="dropdown sbhdg">  
+								<select class="form-control">
+									<option value="select sub-heading">select sub-heading</option>
+								</select>
+							</div><br>
+							<p>Select input here</p>
+							<div class="dropdown inpt">  
+								<select class="form-control">
+									<option value="select input">select input</option>
+									<option value="email">Email</option>
+									<option value="number">Number</option>
+									<option value="text">Text</option>
+									<option value="button">Button</option>
+									<option value="checkbox">Checkbox</option>
+									<option value="file">File</option>	
+									<option value="radio">Radio</option>
+									<option value="textarea">textarea</option>	
+									<option value="select">select</option>
+								</select>
+							</div>
+							<div class="modal-body">
+								<div class="form-group ">
+									<label for="form-in" class="col-form-label inptf">Input</label>
+									<input type="text" class="form-control labl" id="label" placeholder="label">
+									<input type="text" class="form-control naam" id="name" placeholder="name">
+									<input type="text" class="form-control plhd" id="placeholder" placeholder="placeholder">
+									<input type="text" class="form-control clas" id="class" placeholder="class">
+									<input type="text" class="form-control vl" id="value" placeholder="value">
+									<input type="text" class="form-control opt" id="option" placeholder="option"><br>
+									<input type="checkbox" class="disable" id="disable" name="disable" value="disable">
+									<label for="disable">Disable</label><br>
+									<input type="checkbox" class="readonly" id="readonly" name="readonly" value="readonly">
+									<label for="readonly">Readonly</label><br>
+									<input type="checkbox" class="required" id="required" name="required" value="required">
+									<label for="required">Required</label><br>
 								</div>
-								<div class="modal-body">
-									<!-- <form> -->
-										<div class="form-group ">
-											<label for="form-in" class="col-form-label inptf">Input</label>
-											<input type="text" class="form-control labl" id="label" placeholder="label">
-											<input type="text" class="form-control naam" id="name" placeholder="name">
-											<input type="text" class="form-control plhd" id="placeholder" placeholder="placeholder">
-											<input type="text" class="form-control clas" id="class" placeholder="class">
-											<input type="text" class="form-control vl" id="value" placeholder="value">
-											<input type="text" class="form-control opt" id="option" placeholder="option"><br>
-											<input type="checkbox" class="disable" id="disable" name="disable" value="disable">
-											<label for="disable">Disable</label><br>
-											<input type="checkbox" class="readonly" id="readonly" name="readonly" value="readonly">
-											<label for="readonly">Readonly</label><br>
-											<input type="checkbox" class="required" id="required" name="required" value="required">
-											<label for="required">Required</label><br>
-										</div>
-									<!-- </form> -->
-								</div>
-								<div class="modal-footer ff">
-									<button type="submit" class="btn btn-primary">Submit</button>
-								</div>
+							</div>
+							<div class="modal-footer ff">
+								<button type="submit" class="btn btn-primary">Submit</button>
 							</div>
 						</div>
 					</form>
